@@ -5,6 +5,9 @@ brick. The system includes components for motor control, gyro sensor-based orien
 streaming over a network socket. The project is divided into two main scripts: one for controlling the robot and another
 for simulating a server that streams sensor data to the robot.
 
+![python](https://img.shields.io/badge/MicroPython-14354C?style=for-the-badge&logo=python&logoColor=white) 
+![pycharm](https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white)
+
 --- 
 ## Script 1: Robot Control System
 ### Description
@@ -30,6 +33,12 @@ and stabilization angle.
 sensor data.
 #### Main Algorithm
 - **`algorithm()`:** Main algorithm that decides robot actions based on sensor data.
+- This algorithm continuously monitors sensor data to control a robot's actions. When the front sensor detects an 
+obstacle, it checks the left and right sensors: if the left sensor is inactive, the robot turns left by 90 degrees; 
+if the right sensor is inactive, it turns right by 90 degrees. If both left and right sensors detect obstacles, the 
+robot performs a 180-degree turn. If the left sensor detects no obstacle, the robot pauses briefly before turning left.
+Similarly, if the right sensor detects no obstacle, it pauses briefly before turning right. This approach enables the 
+robot to navigate around obstacles effectively based on real-time sensor feedback.
 #### Main Function
 - **`main()`:** Starts the robot control script, initializes motor control and sensor data streaming threads, and runs 
 the main algorithm.
@@ -63,7 +72,8 @@ Integrate a web-based dashboard to provide a live view of the robot's current se
 gyroscopic angle. This dashboard will allow remote monitoring and control, enhancing the user interface and interaction 
 with the robot system.
 ### Key Components
-- **Web Framework**: Utilize frameworks like Flask or Django to build a web server.
+- **Web Framework**: Utilize frameworks like [Flask](https://pypi.org/project/Flask/) or 
+[Django](https://pypi.org/project/Django/) to build a web server.
 - **Socket Communication**: Extend the existing socket communication to include a web client that can receive sensor 
 data updates.
 - **Real-Time Updates**: Implement WebSocket technology for real-time updates of sensor states, motor speeds, and 
@@ -80,8 +90,9 @@ and decision-making in complex environments.
 ### Key Components
 - **Mapping**: Implement simultaneous localization and mapping (SLAM) techniques to create a map of the robot's 
 environment.
-- **Path Planning**: Integrate algorithms such as A* (A-star) or Dijkstra's algorithm to find optimal paths based on 
-mapped data and sensor inputs.
+- **Path Planning**: Integrate algorithms such as [A* (A-star)](https://en.wikipedia.org/wiki/A*_search_algorithm) or 
+[Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) to find optimal paths based on mapped data 
+and sensor inputs.
 - **Dynamic Replanning**: Implement mechanisms for dynamic replanning in response to changing environmental conditions 
 or unexpected obstacles.
 ### Benefits
