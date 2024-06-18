@@ -1,4 +1,4 @@
-# Project Report: Robot Control System with Sensor Data Streaming
+# Robot Control System with Sensor Data Streaming
 ## Project Overview
 This project involves the development of a robot control system using the Pybricks Micropython framework on an EV3 
 brick. The system includes components for motor control, gyro sensor-based orientation stabilization, and sensor data 
