@@ -90,7 +90,7 @@ or unexpected obstacles.
 - **Scalability**: Prepare the robot for more complex tasks and environments with scalable navigation capabilities.
 
 ---
-## Conclusion
+# Conclusion
 This project demonstrates a practical implementation of a robot control system integrated with real-time sensor data 
 streaming. The scripts work in tandem to facilitate autonomous robot navigation and environmental awareness. The use of 
 TCP-communication enables seamless data exchange between the robot and the sensor-module, enhancing the robot's ability 
