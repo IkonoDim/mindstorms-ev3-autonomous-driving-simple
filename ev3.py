@@ -96,6 +96,8 @@ def turn(speed: int, angle: int) -> None:
     while not GYRO.angle() in range(angle - 1, angle + 1):
         pass
 
+    time.sleep(1)
+
     set_speed_both_motors(speed)
     GLOBALS.turning = False
 
@@ -147,29 +149,35 @@ def algorithm():
     """
     Main algorithm that decides robot actions based on sensor data.
     """
-    global GLOBALS, GYRO, SPEED  # Declare global variables used within the function
+    global GLOBALS, GYRO, SPEED
 
-    while True:  # Loop indefinitely for continuous operation
+    while True:
+        if GLOBALS.sensor_data[0] == 1:  # FRONT BLOCKED
+            if GLOBALS.sensor_data[1] == 0:  # LEFT FREE
+                turn(SPEED, -90)
+            elif GLOBALS.sensor_data[2] == 0:  # RIGHT FREE
+                turn(SPEED, 90)
+            else:  # ALL BLOCKED
+                set_speed_both_motors(SPEED * (-1))
 
-        # CASE: FRONT_ACTIVE
-        if GLOBALS.sensor_data[0] == 1:  # Check if front sensor is active
-            if GLOBALS.sensor_data[1] == 0:  # Check if left sensor is inactive
-                turn(SPEED, GYRO.angle() - 90)  # Turn left (90 degrees) relative to current angle
-            elif GLOBALS.sensor_data[2] == 0:  # Check if right sensor is inactive
-                turn(SPEED, GYRO.angle() + 90)  # Turn right (90 degrees) relative to current angle
-            else:
-                turn(SPEED, GYRO.angle() + 180)  # If both left and right sensors are active, turn around
+                while GLOBALS.sensor_data[1] == 1 or GLOBALS.sensor_data[2] == 1:
+                    pass
 
-        # CASE: LEFT_INACTIVE
-        if GLOBALS.sensor_data[1] == 0:  # Check if left sensor is inactive
-            time.sleep(PAUSE_BEFORE_TURN)  # Pause before initiating turn
-            turn(SPEED, GYRO.angle() - 90)  # Turn left (90 degrees) relative to current angle
+                turn(SPEED, -90 if GLOBALS.sensor_data[1] == 0 else 90 if GLOBALS.sensor_data[2] == 0 else 0)
 
-        # CASE: RIGHT_INACTIVE
-        if GLOBALS.sensor_data[2] == 1:  # Check if right sensor is inactive
-            time.sleep(PAUSE_BEFORE_TURN)  # Pause before initiating turn
-            turn(SPEED, GYRO.angle() + 90)  # Turn right (90 degrees) relative to current angle
+        elif GLOBALS.sensor_data[1] == 0:  # LEFT FREE
+            if GLOBALS.sensor_data[0] == 1 and GLOBALS.sensor_data[2] == 1:
+                turn(SPEED, -90)
 
+            elif GLOBALS.stabilization_angle > 0:
+                turn(SPEED, GLOBALS.stabilization_angle * (-1))
+
+        elif GLOBALS.sensor_data[2] == 0:  # RIGHT FREE
+            if GLOBALS.sensor_data[0] == 1 and GLOBALS.sensor_data[1] == 1:
+                turn(SPEED, 90)
+
+            elif GLOBALS.stabilization_angle < 0:
+                turn(SPEED, GLOBALS.stabilization_angle * (-1))
 
 
 def main():
