@@ -5,6 +5,14 @@ brick. The system includes components for motor control, gyro sensor-based orien
 streaming over a network socket. The project is divided into two main scripts: one for controlling the robot and another
 for simulating a server that streams sensor data to the robot.
 
+3 Modules of the Mindstorms Brick were used. (red set)
+- 2x Large Motor (6009430) in port A and port D
+- 1x Gyro Sensor (6008916) in port 4
+
+Authors:
+  Dimitrios Ikonomou
+  Nue Duhanaj
+
 ![python](https://img.shields.io/badge/MicroPython-14354C?style=for-the-badge&logo=python&logoColor=white) 
 ![pycharm](https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white)
 
@@ -87,9 +95,6 @@ and decision-making in complex environments.
 ### Key Components
 - **Mapping**: Implement simultaneous localization and mapping (SLAM) techniques to create a map of the robot's 
 environment.
-- **Path Planning**: Integrate algorithms such as [A* (A-star)](https://en.wikipedia.org/wiki/A*_search_algorithm) or 
-[Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) to find optimal paths based on mapped data 
-and sensor inputs.
 - **Dynamic Replanning**: Implement mechanisms for dynamic replanning in response to changing environmental conditions 
 or unexpected obstacles.
 ### Benefits
