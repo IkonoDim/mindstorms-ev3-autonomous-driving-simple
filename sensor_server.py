@@ -6,7 +6,7 @@ import sys
 
 # Constants
 HB_CHECK_PROBABILITY = 0.05
-SENSOR_IOS = (14, 15, 16)
+SENSOR_IOS = (14, 15, 16)  # Set sensor ports here (F, L, R)
 
 # Check if running on MicroPython; set SANDBOX accordingly
 if hasattr(sys, 'implementation') and sys.implementation.name == 'micropython':
