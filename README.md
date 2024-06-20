@@ -67,7 +67,9 @@ the main algorithm.
 The second application functions as a server that streams real-time sensor data to the robot over a network 
 socket. It establishes socket communication to transmit actual sensor data updates and heartbeat signals at regular 
 intervals. The script reads sensor data from specified IO pins or hardware inputs, depending on whether it runs on 
-MicroPython or another python environment.
+MicroPython or another python environment.\
+Sensors used:
+- 3x MH-Sensor-Series "Flying Fish"
 
 ### Key Components
 #### Imports and Initialization
