@@ -9,9 +9,7 @@ for simulating a server that streams sensor data to the robot.
 - 2x Large Motor (6009430) in port A and port D
 - 1x Gyro Sensor (6008916) in port 4
 
-Authors:
-  Dimitrios Ikonomou
-  Nue Duhanaj
+Authors: Dimitrios Ikonomou, Nue Duhanaj
 
 ![python](https://img.shields.io/badge/MicroPython-14354C?style=for-the-badge&logo=python&logoColor=white) 
 ![pycharm](https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white)
@@ -39,10 +37,25 @@ and stabilization angle.
 sensor data.
 #### Main Algorithm
 - **`algorithm()`:** Main algorithm that decides robot actions based on sensor data.
-![core_algorithm](https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_core.png?raw=true)
+
+<img src="https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_core.png?raw=true" width="100%" alt="">\
+When navigating, the robot follows a set of predefined rules to maneuver around obstacles and stabilize its course. 
+Here's how it operates:\
+If the front is blocked and the left side is clear, the robot will turn left. Conversely, if the front is blocked and 
+the right side is clear, it will turn right. When all three directions—the front, left, and right—are blocked, the robot 
+moves backward until either the left or right becomes free, at which point it turns in the corresponding direction.
+In cases where only the front and right are blocked, the robot will turn left. If only the front and left are blocked, 
+it will turn right.\
+Additionally, the robot continuously monitors its stabilization angle. If the angle is positive, indicating a deviation 
+that needs correction, the robot will turn to stabilize its course. Similarly, if the stabilization angle is negative, 
+it will turn to correct the course deviation.\
+Through this systematic approach, the robot effectively navigates its environment while maintaining stability.
+
 #### Direction stabilization Algorithm
 - **`stabilize_motors() -> None`:** Continuously adjusts the robot's orientation to maintain stability.
-![stabilization_algorithm](https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_stabilization.png?raw=true)
+
+<img src="https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_stabilization.png?raw=true" width="65%" alt="">
+
 
 #### Main Function
 - **`main()`:** Starts the robot control script, initializes motor control and sensor data streaming threads, and runs 
