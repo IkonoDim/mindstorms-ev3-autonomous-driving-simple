@@ -25,20 +25,16 @@ and stabilization angle.
 - **`start_both_motors(speed: int) -> None`:** Starts both motors at the given speed.
 - **`stop_both_motors(hold: bool = False) -> None`:** Stops both motors, optionally holding their position.
 - **`set_speed_both_motors(speed: int)`:** Sets the speed of both motors.
-#### Turning and Stabilization
 - **`turn(speed: int, angle: int) -> None`:** Turns the robot to a specific angle.
-- **`stabilize_motors() -> None`:** Continuously adjusts the robot's orientation to maintain stability.
 #### Sensor Data Streaming
 - **`stream_sensor_data() -> None`:** Establishes a socket connection to stream sensor data and updates the global 
 sensor data.
 #### Main Algorithm
 - **`algorithm()`:** Main algorithm that decides robot actions based on sensor data.
-- This algorithm continuously monitors sensor data to control a robot's actions. When the front sensor detects an 
-obstacle, it checks the left and right sensors: if the left sensor is inactive, the robot turns left by 90 degrees; 
-if the right sensor is inactive, it turns right by 90 degrees. If both left and right sensors detect obstacles, the 
-robot performs a 180-degree turn. If the left sensor detects no obstacle, the robot pauses briefly before turning left.
-Similarly, if the right sensor detects no obstacle, it pauses briefly before turning right. This approach enables the 
-robot to navigate around obstacles effectively based on real-time sensor feedback.
+![core_algorithm](https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_core.png?raw=true)
+#### Direction stabilization Algorithm
+![stabilization_algorithm](https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_stabilization.png?raw=true)
+
 #### Main Function
 - **`main()`:** Starts the robot control script, initializes motor control and sensor data streaming threads, and runs 
 the main algorithm.
