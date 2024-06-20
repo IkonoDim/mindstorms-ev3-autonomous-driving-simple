@@ -33,6 +33,7 @@ sensor data.
 - **`algorithm()`:** Main algorithm that decides robot actions based on sensor data.
 ![core_algorithm](https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_core.png?raw=true)
 #### Direction stabilization Algorithm
+- **`stabilize_motors() -> None`:** Continuously adjusts the robot's orientation to maintain stability.
 ![stabilization_algorithm](https://github.com/IkonoDim/mindstorms-ev3-autonomous-driving-simple/blob/main/assets/structogram_stabilization.png?raw=true)
 
 #### Main Function
