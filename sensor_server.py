@@ -2,11 +2,14 @@ import random
 import socket
 import time
 import sys
+import network
 
 
 # Constants
 HB_CHECK_PROBABILITY = 0.05
-SENSOR_IOS = (14, 15, 16)  # Set sensor ports here (F, L, R)
+SENSOR_IOS = (0, 1, 2)  # Set sensor ports here (F, L, R)
+WIFI_SSID = "YourWifiName"
+WIFI_PASSWORD = "YourWifiPassword"
 
 # Check if running on MicroPython; set SANDBOX accordingly
 if hasattr(sys, 'implementation') and sys.implementation.name == 'micropython':
@@ -16,11 +19,25 @@ if hasattr(sys, 'implementation') and sys.implementation.name == 'micropython':
 else:
     SANDBOX = True
 
+# Function to connect to Wi-Fi
+def connect_to_wifi(ssid, password):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    wlan.connect(ssid, password)
+    while not wlan.isconnected():
+        print("Connecting to WiFi...")
+        time.sleep(1)
+    print("Connected to WiFi!")
+    print("IP Address:", wlan.ifconfig()[0])
+
+connect_to_wifi(WIFI_SSID, WIFI_PASSWORD)
+time.sleep(1)
 
 # Initialize socket for server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(("0.0.0.0", 2000))
 sock.listen(1)
+print("Server Ready")
 
 
 def probability_to_list(probability, length=100) -> list[bool]:
